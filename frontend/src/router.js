@@ -5,6 +5,7 @@ import Login from './pages/Login.vue'
 import NotFound from './pages/NotFound.vue'
 import Uploads from './pages/Uploads.vue'
 import MyImages from './pages/MyImages.vue'
+import Register from './pages/Register.vue'
 
 
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
     },
     {
         path: '/:pathMatch(.*)*',

@@ -1,36 +1,62 @@
 <template lang="">
-    <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
-      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-white">
-            My Images
-        </h1>
-      </div>
-    </header>
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="relative bg-gray-800 after:pointer-events-none after:absolute after:inset-x-0 after:inset-y-0 after:border-y after:border-white/10">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold tracking-tight text-white">
+              My Images
+          </h1>
+        </div>
+      </header>
+    </div>
     <main>
-      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        
-      </div>
-      <div class="mb-4">
-          <label for="label" 
-          class="block text-sm/6 font-medium text-white">
-              Label
-          </label>
-          <div class="mt-2">
-              <input type="text" 
-              name="label" id="label" 
-              class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div v-for="image in images" :key="image.id" class="bg-white overflow-hidden shadow rounded-lg">
+          <img :src="image.url" alt="Image" class="w-full h-48 object-contain">
+          <div class="px-4 py-4">
+            <h3 class="text-lg font-semibold text-gray-900">{{ image.name }}</h3>
+            <p class="text-sm text-gray-500 mb-4">{{ image.label }}</p>
+            <div class="flex justify-between ">
+              <button type="submit"
+                      @click="copyImageUrl(image.url)"
+                      class="rounded-md bg-indigo-600 px-3 py-1 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Copy Image Url
+              </button>
+              <button type="submit"
+                      @click="deleteImage(image.id)"
+                      class="rounded-md bg-red-600 px-3 py-1 text-sm/6 font-semibold text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700">
+                Delete
+              </button>
+            </div>
           </div>
+        </div>
       </div>
-      <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-          Uploads
-      </button>
-    </main>
+    </div>
+  </main>
 </template>
-<script>
-export default {
-    
+<script setup>
+import { onMounted, ref } from 'vue'
+
+
+const images = [
+  { id: 1, label: 'Test', url: 'http://localhost' },
+  { id: 2, label: 'Test', url: 'http://localhost' },
+  { id: 3, label: 'Test', url: 'http://localhost' },
+]
+
+async function copyImageUrl(url) {
+  await navigator.clipboard.writeText(url)
 }
+
+function deleteImage(id) {
+  if (!confirm("Are you sure you want to delete this image?")) {
+    return
+  }
+}
+
+
+
+onMounted(() => {
+
+})
 </script>
-<style lang="">
-    
-</style>
